@@ -58,6 +58,17 @@
 \newcommand{\Prmys}[2]{\mathrm{Pr}_s(#1, #2)}
 \newcommand{\Plan}[1]{\mathrm{Plan}(#1)}
 \newcommand{\Graph}[1]{\mathrm{Graph}(#1)}
+\newcommand{\BPlan}[1]{\mathrm{BPlan}(#1)}
+\newcommand{\BGraph}[1]{\mathrm{BGraph}(#1)}
+\newcommand{\RPlan}[1]{\mathrm{RPlan}(#1)}
+\newcommand{\RGraph}[1]{\mathrm{RGraph}(#1)}
+\newcommand{\SInd}[1]{\mathrm{SInd}(#1)}
+\newcommand{\NSInd}[1]{\mathrm{NSInd}(#1)}
+\newcommand{\Aim}[1]{\mathrm{Aim}(#1)}
+\newcommand{\Spec}[1]{\mathrm{Spec}(#1)}
+\newcommand{\Reserve}[2]{\mathrm{Reserve}_{#1}(#2)}
+\newcommand{\Hit}[1]{\mathrm{Hit}(#1)}
+\newcommand{\Op}[1]{\mathrm{Op}~#1}
 
 \begin{document}
 
@@ -87,7 +98,7 @@ $D_{\subset}$) $x \subset y \Def x \subseteq y,~ \sim x \eqs y$.
 
 $S_{\{ | \}}$) $x \in \{ y ~|~  A(y) \} \Def A(x)$.
 
-$D_{\{ \mydots \}}$)~ $\{ x_1,~ x_2,~ \mydots \} \defeq \{ y ~|~ y = x_1;~ y = x_2;~ \mydots \}$.
+$D_{\{ \mydots \}}$) $\{ x_1,~ x_2,~ \mydots \} \defeq \{ y ~|~ y = x_1;~ y = x_2;~ \mydots \}$.
 
 $D_{\eqi}$) $x \eqi y \Def \forall z~ (x \in z \Leftrightarrow y \in z)$. (Эквиинклюзивность.)
 
@@ -125,11 +136,11 @@ $D_{\eqt}$) $x_1 \in_1 \langle x_1,~ \mydots \rangle,~ \mydots$.
 
 $S_{\{ | \}}$) $\langle x_1,~ \mydots \rangle \in \{ \langle y_1,~ \mydots \rangle ~|~ A(y_1,~ \mydots) \} \Def A(x_1,~ \mydots)$.
 
-$D_\text{pr-t}$) Проекцией кортежа $u$ на подмножество $v \subseteq \Header{u}$ называется кортеж $u'$, такой, что $\Header{u'} = v,~ \underset{v}{\forall} i~ u_i \in_i u'.$ Обозначается: $\Prmy{u, v}$.
+$D_\text{pr-t}$) Проекцией кортежа $u$ на подмножество $v \subseteq \Header{u}$ называется кортеж $u'$, такой, что $\Header{u'} = v,~ \underset{v}{\forall} i~ u_i \in_i u'$. Обозначается: $\Prmy{u}{v}$.
 
 $D_\text{pr-s}$) Проекцией множества $x$ кортежей, все из которых имеют заголовок $y$, на множество $y' \subseteq y$ называется множество проекций всех элементов множества $x$ на $y'$.
 
-Обозначается: $\Prmys{x, y'}$.
+Обозначается: $\Prmys{x}{y'}$.
 
 $D^{(n)}_{\times \text{arb}}$) $\vartimes \langle x_1,~ \mydots \rangle \defeq \{ \langle y_1,~ \mydots \rangle,~ y_1 \in x_1,~ \mydots \}$. (Декартово произведение произвольного кортежа множеств.)
 
@@ -147,18 +158,64 @@ $D_\text{n-rel-sat}$) $\rho(x_1,~ \mydots) \Def \langle x_1,~ \mydots \rangle \i
 
 $D_\text{spec-i}$) $i$-я область задания отношения $\rho$ есть $\Plan{\rho}_i$. (Обозначается: $\sigma_i(\rho)$.)
 
-$D_\text{def-i}$) $i$-я область определения отношения $\rho$ есть $\{ x \in \sigma_i(\rho) ~|~ \exists \mydots~ \langle \mydots,~ x,~ \mydots \rangle \in \Graph(\rho) \}$. (Обозначается: $\delta_i(\rho)$.)
+$D_\text{def-i}$) $i$-я область определения отношения $\rho$ есть $\{ x \in \sigma_i(\rho) ~|~ \exists \mydots~ \langle \mydots,~ x,~ \mydots \rangle \in \Graph{\rho} \}$. (Обозначается: $\delta_i(\rho)$.)
 
 $D_\text{int-rel}$) Отношение, все области задания которого -- одно множество $x$, будем называть внутренним в/на $x$ (или однородным).
 
 $D_\text{corr}$) 2-арные отношения называются еще бинарными или соответствиями.
 
-$D_\text{w-rel}$) $\rho$-полное отношение плана $x \Def \Plan{\rho} = x,~ \Graph{\rho} = \vartimes x$.
+$D_\text{w-rel}$) $\rho$ -- полное отношение плана $x \Def \Plan{\rho} = x,~ \Graph{\rho} = \vartimes x$.
 
 Обозначается: $\mathscr{W}_x$.
 
-$D_\text{e-rel}$) $\rho$-пустое отношение плана $x \Def \Plan{\rho} = x,~ \Graph{\rho} = \varnothing$.
+$D_\text{e-rel}$) $\rho$ -- пустое отношение плана $x \Def \Plan{\rho} = x,~ \Graph{\rho} = \varnothing$.
 
 Обозначается: $\mathscr{E}_x$.
+
+\section{Операции}
+
+$D_\text{n-op}$) $n$-арная операция $\omega$ определяется опорным планом $\BPlan{\omega}$, селективным индексом $\SInd{\omega} \in \Header{\BPlan{\omega}}$ и опорным графиком $\BGraph{\omega}$, так, что $len(\BPlan{\omega}) = n+1,~ \BGraph{\omega} \subseteq \BPlan{\omega}$.
+
+$D_\text{aim-dom}$) Областью прицеливания операции $\omega$ назовём $\BPlan{\omega}_{\SInd{\omega}}$ и обозначим через $\Aim{\omega}$.
+
+$D_\text{non-sel-ind}$) Множеством неселективных индексов операции $\omega$ назовём $\Spec{\BPlan{\omega}} \setminus \{ \SInd{\omega} \}$ и обозначим через $\NSInd{\omega}$.
+
+$D_\text{n-op-app}$) $\omega (x_1,~ \mydots,~ x_n) \sim x_{n+1} \Def \langle x_1,~ \mydots,~ x_{n+1} \rangle \in \BGraph{\omega},~ x_{n+1} \in \Aim{\omega}$.
+
+Произносят: <<применение операции $\omega$ к объектам $x_1,~ \mydots,~ x_n$ даёт $x_{n+1}$>>.
+
+В таком случае объекты $x_1,~ \mydots,~ x_n$ будем называть операндами, а $x_{n+1}$ -- результатом операции $\omega$.
+
+$D_\text{reserve}$) Множество $\{ y \in \Aim{\omega} ~|~ \omega (x_1,~ \mydots,~ x_n) \sim y \}$ будем называть резервом операции $\omega$ при операндах $x_1,~ \mydots,~ x_n$ и обозначим: $\Reserve{\omega}{ x_1,~ \mydots,~ x_n }$.
+
+$D_\text{spec-i-op}$) $i$-я область задания операции $\omega$ есть $\BPlan{\omega}_i$. (Обозначается: $\sigma_i(\omega)$.)
+
+$D_\text{def-i-op}$) $i$-я область определения операции $\omega$ есть $\{ x \in \sigma_i(\omega) ~|~ \exists \mydots~ \langle \mydots,~ x,~ \mydots \rangle \in \BGraph{\omega} \}$. (Обозначается: $\delta_i(\omega)$.)
+
+$D_\text{rest-plan}$) Ограниченный план операции $\omega$ есть $\Prmy{\BPlan{\omega}}{\NSInd{\omega}}$.
+
+Обозначается: $\RPlan{\omega}$.
+
+$D_\text{rest-graph}$) Ограниченный график операции $\omega$ есть $\Prmys{\BGraph{\omega}}{\NSInd{\omega}}$.
+
+Обозначается: $\RGraph{\omega}$.
+
+$D_\text{hit-op}$) Областью попадания операции $\omega$ назовём $\{ y \in \Aim{\omega} ~|~ \exists \mydots~ \omega(\mydots) \sim y \}$.
+
+Обозначается: $\Hit{\omega}$.
+
+Область прицеливания будем называть ещё селективной областью задания, область попадания -- селективной областью определения, остальные области задания и определения -- неселективными.
+
+$D_\text{int-o}$) Операцию, все области задания и прицеливания которой -- одно множество $x$, будем называть внутренней в/на $x$ (или однородной).
+
+$D_\text{bin-o}$) 2-арная операция называется бинарной.
+
+$D_\text{w-o}$) $\omega$ -- полная операция опорного плана $x \Def \BPlan{\omega} = x,~ \BGraph{\omega} = \vartimes x$.
+
+Обозначается: $\Op{\mathscr{W}_x}$.
+
+$D_\text{e-o}$) $\omega$ -- пустая операция опорного плана $x \Def \BPlan{\omega} = x,~ \BGraph{\omega} = \varnothing$.
+
+Обозначается: $\Op{\mathscr{E}_x}$.
 
 \end{document}
