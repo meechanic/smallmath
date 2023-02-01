@@ -18,6 +18,7 @@
 \usepackage{indentfirst}
 \usepackage{hyperref}
 \usepackage{mathrsfs}
+\usepackage{stmaryrd}
 \urlstyle{same}
 
 \renewcommand{\rmdefault}{cmr} % Шрифт с засечками
@@ -51,6 +52,13 @@
 \newcommand{\geqp}[0]{\underset{p}{\geq}} % "больше или равно по мощности" для множеств
 \newcommand{\gtp}[0]{\underset{p}{>}} % "больше по мощности" для множеств
 
+\newcommand{\Header}[1]{\mathrm{Header}(#1)}
+\newcommand{\Cont}[1]{\mathrm{Cont}(#1)}
+\newcommand{\Prmy}[2]{\mathrm{Pr}(#1, #2)}
+\newcommand{\Prmys}[2]{\mathrm{Pr}_s(#1, #2)}
+\newcommand{\Plan}[1]{\mathrm{Plan}(#1)}
+\newcommand{\Graph}[1]{\mathrm{Graph}(#1)}
+
 \begin{document}
 
 \part{Множества, отношения, структуры}
@@ -59,98 +67,98 @@
 
 Верны следующие схемы.
 
-$S_{=A})~ s = s.$
+$S_{=A}$) $s = s$.
 
-$S_{=L})~ s = t,~ A(\mydots,~ s) \Rightarrow A(\mydots,~ t).$
+$S_{=L}$) $s = t,~ A(\mydots,~ s) \Rightarrow A(\mydots,~ t)$.
 
-$D_{\exists!})~ \forall \mydots ~\exists! x~ A(\mydots,~ x) \Def \forall \mydots~ (\exists x~ A(\mydots,~ x), \forall x, y~ (A(\mydots,~ x), A(\mydots,~ y) \Rightarrow x = y)).$
+$D_{\exists!}$) $\forall \mydots ~\exists! x~ A(\mydots,~ x) \Def \forall \mydots~ (\exists x~ A(\mydots,~ x), \forall x, y~ (A(\mydots,~ x), A(\mydots,~ y) \Rightarrow x = y))$.
 
 \section{Множества}
 
-$D_{\subseteq})~ x \subseteq y \Def \forall z~ (z \in x \Rightarrow x \in y).$
+$D_{\subseteq}$) $x \subseteq y \Def \forall z~ (z \in x \Rightarrow x \in y)$.
 
 (Говорят: $x$ -- подмножество $y$ или $x$ -- ограничение $y$.)
 
-$D_{\eqs})~ x \eqs y \Def x \subseteq y,~ y \subseteq x.$ (Теоретико-множественное равенство или эквирезидентность.)
+$D_{\eqs}$) $x \eqs y \Def x \subseteq y,~ y \subseteq x$. (Теоретико-множественное равенство или эквирезидентность.)
 
-$D_{\subset})~ x \subset y \Def x \subseteq y,~ \sim x \eqs y.$
+$D_{\subset}$) $x \subset y \Def x \subseteq y,~ \sim x \eqs y$.
 
 (Говорят: $x$ -- собственное подмножество $y$ или $x$ -- собственное ограничение $y$.)
 
-$S_{\{ | \}})~ x \in \{ y ~|~  A(y) \} \Def A(x).$
+$S_{\{ | \}}$) $x \in \{ y ~|~  A(y) \} \Def A(x)$.
 
-$D_{\{ \mydots \}})~ \{ x_1,~ x_2,~ \mydots \} \defeq \{ y ~|~ y = x_1;~ y = x_2;~ \mydots \}.$
+$D_{\{ \mydots \}}$)~ $\{ x_1,~ x_2,~ \mydots \} \defeq \{ y ~|~ y = x_1;~ y = x_2;~ \mydots \}$.
 
-$D_{\eqi})~ x \eqi y \Def \forall z~ (x \in z \Leftrightarrow y \in z).$ (Эквиинклюзивность.)
+$D_{\eqi}$) $x \eqi y \Def \forall z~ (x \in z \Leftrightarrow y \in z)$. (Эквиинклюзивность.)
 
-$F_{\eqs})~ \forall x, y~ (x \eqi y \Leftrightarrow x \eqs y).$
+$F_{\eqs}$) $\forall x, y~ (x \eqi y \Leftrightarrow x \eqs y)$.
 
-$D_{\cup_{\text{arb}}})~ \cup x \defeq \{ y ~|~ \exists z~ (z \in x,~ y \in z) \}.$
+$D_{\cup_{\text{arb}}}$) $\cup x \defeq \{ y ~|~ \exists z~ (z \in x,~ y \in z) \}$.
 
-$D_{\cap_{\text{arb}}})~ \cap x \defeq \{ y ~|~ \exists z~ (z \in x,~ y \in z) \}.$
+$D_{\cap_{\text{arb}}}$) $\cap x \defeq \{ y ~|~ \exists z~ (z \in x,~ y \in z) \}$.
 
-$D_{\cup})~ x \cup y \defeq \cup \{ x, y \}.$ (Или $\{ z ~|~ z \in x;~ z \in y \}$.)
+$D_{\cup}$) $x \cup y \defeq \cup \{ x, y \}$. (Или $\{ z ~|~ z \in x;~ z \in y \}$.)
 
-$D_{\cap})~ x \cap y \defeq \cap \{ x, y \}.$ (Или $\{ z ~|~ z \in x,~ z \in y \}$.)
+$D_{\cap}$) $x \cap y \defeq \cap \{ x, y \}$. (Или $\{ z ~|~ z \in x,~ z \in y \}$.)
 
-$D_{/})~ x / y \defeq \{ z ~|~ z \in x,~ \sim z \in y \}.$
+$D_{/}$) $x / y \defeq \{ z ~|~ z \in x,~ \sim z \in y \}$.
 
-$D_{\varnothing})~ \varnothing \defeq \{ x ~|~ \sim x = x \}.$
+$D_{\varnothing}$) $\varnothing \defeq \{ x ~|~ \sim x = x \}$.
 
 \section{Кортежи}
 
-Утверждения (и схемы), приведённые ниже, можно считать своего рода "аксиомами кортежей". \quad (составляющими определение)
+Утверждения (и схемы), приведённые ниже, можно считать своего рода <<аксиомами кортежей>> (составляющими определение).
 
-$D_\text{header-t})~ Header$(<$x_1,~ \mydots$>) $\defeq \{ 1,~ \mydots \}.$ ("Заголовок кортежа".)
+$D_\text{header-t}$) $\Header{\langle x_1,~ \mydots \rangle}$ $\defeq \{ 1,~ \mydots \}$. (<<Заголовок кортежа>>.)
 
-$D_\text{cont-t})~ Cont$(<$x_1,~ \mydots$>) $\defeq \{ x_1,~ \mydots \}.$ ("Содержимое кортежа".)
+$D_\text{cont-t}$) $\Cont{ \langle x_1,~ \mydots \rangle } \defeq \{ x_1,~ \mydots \}$. (<<Содержимое кортежа>>.)
 
-$F_{t1}^{(n)})$ Для всякого кортежа $u$ верно $\underset{Header(u)}{\forall i} \exists! x~ x \in_i u.$
+$F_{t1}^{(n)}$) Для всякого кортежа $u$ верно $\underset{\Header{u}}{\forall i} \exists! x~ x \in_i u$.
 
-$D_\text{equiheader-t})$ Кортежи $u$ и $v$ называются равнозаголовочными, если $Header(u) \eqs Header(v)$.
+$D_\text{equiheader-t}$) Кортежи $u$ и $v$ называются равнозаголовочными, если $\Header{u} \eqs \Header{v}$.
 
 Обозначается $u \underset{eh}{\sim} v$.
 
-$D_{\eqt})$ Для всяких кортежей $u, v$ верно $u \eqt v \Def u \underset{eh}{\sim} v, \underset{Header(u)}{\forall i} \forall x~ (x \in_i u \Rightarrow x \in_i v).$
+$D_{\eqt}$) Для всяких кортежей $u, v$ верно $u \eqt v \Def u \underset{eh}{\sim} v, \underset{\Header{u}}{\forall i} \forall x~ (x \in_i u \Rightarrow x \in_i v)$.
 
-$D_{\eqt})~ x_1 \in_1 \text{<} x_1,~ \mydots \text{>},~ \mydots~ .$
+$D_{\eqt}$) $x_1 \in_1 \langle x_1,~ \mydots \rangle,~ \mydots$.
 
-$S_{\{ | \}})~ \text{<}x_1,~ \mydots \text{>} \in \{ \text{<}y_1,~ \mydots \text{>} ~|~ A(y_1,~ \mydots) \} \Def A(x_1,~ \mydots).$
+$S_{\{ | \}}$) $\langle x_1,~ \mydots \rangle \in \{ \langle y_1,~ \mydots \rangle ~|~ A(y_1,~ \mydots) \} \Def A(x_1,~ \mydots)$.
 
-$D_\text{pr-t})$ Проекцией кортежа $u$ на подмножество $v \subseteq Header(u)$ называется кортеж $u'$, такой, что $Header(u') = v,~ \underset{v}{\forall} i~ u_i \in_i u'.$ Обозначается: $Pr(u, v).$
+$D_\text{pr-t}$) Проекцией кортежа $u$ на подмножество $v \subseteq \Header{u}$ называется кортеж $u'$, такой, что $\Header{u'} = v,~ \underset{v}{\forall} i~ u_i \in_i u'.$ Обозначается: $\Prmy{u, v}$.
 
-$D_\text{pr-s})$ Проекцией множества $x$ кортежей, все из которых имеют заголовок $y$, на множество $y' \subseteq y$ называется множество проекций всех элементов множества $x$ на $y'$.
+$D_\text{pr-s}$) Проекцией множества $x$ кортежей, все из которых имеют заголовок $y$, на множество $y' \subseteq y$ называется множество проекций всех элементов множества $x$ на $y'$.
 
-Обозначается: $Pr_s(x, y').$
+Обозначается: $\Prmys{x, y'}$.
 
-$D^{(n)}_{\times \text{arb}})~ \mathbb{X}~\text{<}x_1,~ \mydots \text{>} \defeq \{ \text{<}y_1,~ \mydots \text{>},~ y_1 \in x_1,~ \mydots \}.$ (Декартово произведение произвольного кортежа на множество.)
+$D^{(n)}_{\times \text{arb}}$) $\vartimes \langle x_1,~ \mydots \rangle \defeq \{ \langle y_1,~ \mydots \rangle,~ y_1 \in x_1,~ \mydots \}$. (Декартово произведение произвольного кортежа множеств.)
 
-$D_\times)~ x_1 \times x_2 \defeq \mathbb{X}~$<$x_1,~ x_2$>. (Декартово произведение множества $x_1$ на $x_2$.)
+$D_\times$) $x_1 \times x_2 \defeq \vartimes \langle x_1,~ x_2 \rangle$. (Декартово произведение множества $x_1$ на $x_2$.)
 
 \section{Отношения}
 
-$D_\text{n-rel})$ $n$-арное отношение $\rho$ определяется планом $Plan(\rho)$ и графиком $Graph(\rho)$, так, что $len(Plan(\rho)) = n,~ Graph(\rho) \subseteq \mathbb{X}~ Plan(\rho).$
+$D_\text{n-rel}$) $n$-арное отношение $\rho$ определяется планом $\Plan{\rho}$ и графиком $\Graph{\rho}$, так, что $len(\Plan{\rho}) = n,~ \Graph{\rho} \subseteq \vartimes \Plan{\rho}$.
 
-$D_\text{n-rel-sat})~ \rho(x_1,~ \mydots) \Def \text{<}x_1,~ \mydots \text{>} \in Graph(\rho).$
+$D_\text{n-rel-sat}$) $\rho(x_1,~ \mydots) \Def \langle x_1,~ \mydots \rangle \in \Graph{\rho}$.
 
-Произносят: "объекты $x_1,~ \mydots$ удовлетворяют отношению $\rho$".
+Произносят: <<объекты $x_1,~ \mydots$ удовлетворяют отношению $\rho$>>.
 
 В таком случае будем называть объекты $x_1,~ \mydots$ релянтами отношения $\rho$.
 
-$D_\text{spec-i})$ $i$-я область задания отношения $\rho$ есть $Plan(\rho)_i$. (Обозначается: $\sigma_i(\rho)$.)
+$D_\text{spec-i}$) $i$-я область задания отношения $\rho$ есть $\Plan{\rho}_i$. (Обозначается: $\sigma_i(\rho)$.)
 
-$D_\text{def-i})$ $i$-я область определения отношения $\rho$ есть $\{ x \in \sigma_i(\rho) ~|~ \exists \mydots~ \text{<}\mydots,~ x,~ \mydots \text{>} \in Graph(\rho) \}.$ (Обозначается: $\delta_i(\rho)$.)
+$D_\text{def-i}$) $i$-я область определения отношения $\rho$ есть $\{ x \in \sigma_i(\rho) ~|~ \exists \mydots~ \langle \mydots,~ x,~ \mydots \rangle \in \Graph(\rho) \}$. (Обозначается: $\delta_i(\rho)$.)
 
-$D_\text{int-rel})$ Отношение, все области задания которого -- одно множество $x$, будем называть внутренним в/на $x$ (или однородным).
+$D_\text{int-rel}$) Отношение, все области задания которого -- одно множество $x$, будем называть внутренним в/на $x$ (или однородным).
 
-$D_\text{corr})$ 2-арные отношения называются еще бинарными или соответствиями.
+$D_\text{corr}$) 2-арные отношения называются еще бинарными или соответствиями.
 
-$D_\text{w-rel})$ $\rho$-полное отношение плана $x \Def Plan(\rho) = x,~ Graph(\rho) = \mathbb{X}~ x.$
+$D_\text{w-rel}$) $\rho$-полное отношение плана $x \Def \Plan{\rho} = x,~ \Graph{\rho} = \vartimes x$.
 
-Обозначается: $W_x$.
+Обозначается: $\mathscr{W}_x$.
 
-$D_\text{e-rel})$ $\rho$-пустое отношение плана $x \Def Plan(\rho) = x,~ Graph(\rho) = \varnothing.$ 
+$D_\text{e-rel}$) $\rho$-пустое отношение плана $x \Def \Plan{\rho} = x,~ \Graph{\rho} = \varnothing$.
 
-Обозначается: $\xi_x$.
+Обозначается: $\mathscr{E}_x$.
 
 \end{document}
