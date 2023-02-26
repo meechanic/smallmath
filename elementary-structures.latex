@@ -1,0 +1,505 @@
+\documentclass[a4paper]{article}
+%\usepackage{etoolbox}
+\usepackage{a4wide}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{alltt}
+\usepackage{times}
+\usepackage[utf8]{inputenc}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage{amssymb,amsmath}
+\usepackage{scrextend}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{mathrsfs}
+%\hypersetup{
+%    colorlinks=true,
+%    linkcolor=blue,
+%    filecolor=magenta,      
+%    urlcolor=cyan,
+%}
+\urlstyle{same}
+
+% \setlength{\parindent}{0pt}
+
+%\lstset{
+%mathescape=true,
+%texcl=true,
+%% https://tex.stackexchange.com/questions/99257/how-can-i-typeset-greek-letters-in-listings
+%}
+
+\newcommand\mydots{\hbox to 1em{.\hss.\hss.}}
+\newcommand{\somethingfalse}[1]{\mathrm{somethingfalse}(#1)}
+\newcommand{\Sop}[1]{\mathrm{S}(#1)}
+\newcommand{\Next}[2]{\mathrm{Next}(#1, #2)}
+\newcommand{\Def}[0]{\underset{d}{\Leftrightarrow}}
+\newcommand{\defeq}[0]{\underset{d}{=}}
+\newcommand{\eqs}[0]{\underset{s}{=}}
+\newcommand{\eqt}[0]{\underset{t}{=}}
+\newcommand{\eqr}[0]{\underset{r}{=}}
+\newcommand{\eqp}[0]{\underset{p}{=}}
+\newcommand{\subsetr}[0]{\underset{r}{\subset}}
+\newcommand{\subseteqr}[0]{\underset{r}{\subseteq}}
+\newcommand{\geqp}[0]{\underset{p}{\geq}}
+\newcommand{\leqp}[0]{\underset{p}{\leq}}
+\newcommand{\gtp}[0]{\underset{p}{>}}
+\newcommand{\ltp}[0]{\underset{p}{<}}
+\newcommand{\capr}[0]{\underset{(r)}{\cap}}
+\newcommand{\cupr}[0]{\underset{(r)}{\cup}}
+\newcommand{\setminusr}[0]{\underset{(r)}{\setminus}}
+\newcommand{\subsetst}[0]{\underset{st}{\subset}}
+\newcommand{\subseteqst}[0]{\underset{st}{\subseteq}}
+\newcommand{\eqst}[0]{\underset{st}{=}}
+
+\renewcommand{\rmdefault}{cmr} % Шрифт с засечками
+\renewcommand{\sfdefault}{cmss} % Шрифт без засечек
+\renewcommand{\ttdefault}{cmtt} % Моноширинный шрифт
+
+%\makeindex
+
+%\makeatletter
+%\pretocmd{\chapter}{\addtocontents{toc}{\protect\addvspace{15\p@}}}{}{}
+%\pretocmd{\section}{\addtocontents{toc}{\protect\addvspace{5\p@}}}{}{}
+%\makeatother
+
+\begin{document}
+
+%\title{Математика с нуля}
+%\author{Ефремов Михаил (\href{https://meechanic.github.io/}{https://meechanic.github.io/})}
+%\maketitle
+
+%\centerline{Дилетантское введение в математику.}
+%\begin{abstract}
+%\end{abstract}
+
+\part{Множества, отношения, структуры}
+
+\section{$n$-арные отношения.}
+
+$D_{n-rel}$) $n$-арное отношение -- предикат вида $P(x_1, \mydots, x_n)$.
+
+$D_{bin-rel}$) Бинарное отношение -- предикат вида $P(x_1, x_2)$.
+
+Рассмотрим особое бинарное отношение <<$=$>>.
+
+$S_{=R}$) Для любого предметного символа $s$: $s = s$.
+
+$S_{=L}$) Для любых предметных символов $s$ и $t$: $s = t, A(\mydots, s) \Rightarrow A(\mydots, t)$.
+
+$D_{\exists!}$) $\forall \mydots \exists! x~A(\mydots, x) \Def \forall \mydots~(\exists x~A(\mydots, x),~\forall x,y~(A(\mydots, x), A(\mydots, y) \Rightarrow x = y))$.
+
+\section{Множества}
+
+$D_{\subseteq}$) $\alpha \subseteq \beta \Def \forall x~(x \in \alpha \Rightarrow x \in \beta)$.
+
+$D_{\eqs}$) $\alpha \eqs \beta \Def \alpha \subseteq \beta,~\beta \subseteq \alpha$.
+
+$D_{\subset}$) $\alpha \subset \beta \Def \alpha \subseteq \beta,~\sim \alpha = \beta$.
+
+$D_{\{|\}}$) $m \in \{x|~P(x)\} \Def P(m)$.
+
+$D_{\{\mydots\}}$) $\{a_1, a_2, \mydots\} \defeq \{x|~x = a_1;~x = a_2;~\mydots\}$.
+
+$D_{\cup arb}$) $\bigcup \alpha \defeq \{x|~\exists \xi~(\xi \in \alpha,~x \in \xi)\}$.
+
+$D_{\cap arb}$) $\bigcap \alpha \defeq \{x|~\forall \xi~(\xi \in \alpha,~x \in \xi)\}$.
+
+$D_{\cup}$) $\alpha \cup \beta \defeq \bigcup\{\alpha,~\beta\}$. (Или $\{x|~x \in \alpha;~x \in \beta\}$.)
+
+$D_{\cap}$) $\alpha \cap \beta \defeq \bigcap\{\alpha,~\beta\}$. (Или $\{x|~x \in \alpha,~x \in \beta\}$.)
+
+$D_{/}$) $\alpha / \beta \defeq \{x|~x \in \alpha,~\sim x \in \beta\}$.
+
+$D_{\varnothing}$) $\varnothing \defeq \{x|~\sim x = x\}$.
+
+\section{Кортежи}
+
+$F_{t1}^{(n)}$) $\forall m \exists!x~x \in_{i} m$.
+
+$D_{\eqt}^{(n)}$) $m \eqt n \Def \forall x_1, \mydots~((x_1 \in_1 m, \mydots) \Rightarrow (x_1 \in_1 n, \mydots))$. (Кортежи с разным числом компонентов не сравниваются.)
+
+$D_{\langle\rangle}^{(n)}$) $x_1 \in_1 \langle x_1, \mydots \rangle, \mydots$.
+
+$D_{\{|\}}^{(n)}$) $\langle m_1, \mydots \rangle \in \{\langle x_1, \mydots \rangle|P(x_1, \mydots)\} \Def P(m_1, \mydots)$ (Обозначим $\Gamma_P = \{\langle x_1, \mydots \rangle|P(x_1, \mydots)\}$)
+
+$D_{times}^{(n)}$) $(\alpha_1 \times \alpha_2) = \{\langle x_1, x_2 \rangle | x_1 \in \alpha_1,~x_2 \in \alpha_2\}$. (Далее внешние скобки будем иногда опускать.)
+
+$D_{single-t}^{(n)}$) Запись $\langle x \rangle$ эквивалентна $x$.
+
+$D_{nest-t}^{(n)}$) Запись $\langle x_1, \mydots, x_n \rangle$ эквивалентна $\langle \langle x_1, \mydots, x_{n-1} \rangle, x_n \rangle$.
+
+\section{Структуры}
+
+$D_{struct}$) Структура $S$ определена, если определён набор $S_{carrier}$ доменов (<<носитель>>) вместе с набором $S_{signature}$ отношений, заданных на этих доменах (<<сигнатура>>).
+
+$D_{spec-i}$) $i$-я область задания ($i$-е поле) предиката $P$ -- домен $i$-й компоненты $P$. (Обозначается: $\sigma_i (P)$.)
+
+$D_{def-i}$) $i$-я область определения предиката $P$ есть множество $\{x_i|~\exists \mydots~P(\mydots, x_i)\}$, рассматриваемое как подмножество $\sigma_i(P)$. (Обозначается: $\delta_i(P)$.)
+
+$D_{int-rel}$) Предикат, все области задания которого -- одно множество $\alpha$, будем называть внутренним (для $\alpha$).
+
+\section{Отношения. Продолжение}
+
+Ниже в этом разделе $i$ пробегает значения из множества $\{1, \mydots, n\}$.
+
+$D_{\subseteqr}$) $P^{(n)} \subseteqr Q^{(n)} \Def \forall i~(\delta_i(P) \subset \delta_i(Q))$, $\Gamma_P \subset \Gamma_Q$. (<<$P$ -- ограничение $Q$>>; <<$Q$ -- расширение $P$>>)
+
+$D_{\eqr}$) $P^{(n)} \eqr Q^{(n)} \Def \forall i~(\delta_i(P) \eqs \delta_i(Q))$, $\Gamma_P \eqs \Gamma_Q$.
+
+$D_{\subsetr}$) $P^{(n)} \subsetr Q^{(n)} \Def P^{(n)} \subseteqr Q^{(n)}, \sim P^{(n)} \eqr Q^{(n)}$.
+
+$D_{\cupr}$) $\forall i~(\delta_i(P \cupr Q) \eqs \delta_i(P) \cupr \delta_i(Q))$, $\Gamma_{P \cupr Q} \eqs \Gamma_P \cup \Gamma_Q$.
+
+$D_{\capr}$) $\forall i~(\delta_i(P \capr Q) \eqs \delta_i(P) \capr \delta_i(Q))$, $\Gamma_{P \capr Q} \eqs \Gamma_P \cap \Gamma_Q$.
+
+$D_{\setminusr}$) $\forall i~(\delta_i(P \setminusr Q) \eqs \delta_i(P) \setminusr \delta_i(Q))$, $\Gamma_{P \setminusr Q} \eqs \Gamma_P \setminus \Gamma_Q$.
+
+$D_{\mathscr{W}^{(n)}}$) $\mathscr{W}^{(n)} \defeq \sigma_1 \times \mydots \times \sigma_n$.
+
+$D_{\mathscr{E}^{(n)}}$) $\mathscr{E}^{(n)} \defeq \varnothing$.
+
+\section{Тотальные и уникальные $n$-арные отношения. Отображения}
+
+$D_{tot}$) $P$ $\sigma$ -- тотально на $\Delta$ по $k$-й компоненте (далее будем говорить <<по $k$>>) $\Def \underset{\sigma}{\forall} x \underset{\Delta}{\exists} \mydots~P(\mydots, x_k)$. (Здесь $\Delta$ -- область тотальности по $k$.)
+
+$D_{uniq}$) $P$ $\sigma$-оперативно на $\Delta$ по $k$ $\Def \underset{\Delta}{\forall} \mydots \underset{\sigma}{\exists}! x_k~P(\mydots, x_k)$. (Здесь $\Delta$ -- область оперативности по $k$. В данном случае $k$ назовём ведомой компонентой, а остальные -- ведущими.)
+
+В $D_{tot}$ и $D_{uniq}$ если $\sigma$ не указано, то имеется в виду декартово произведение областей $\delta_i(P), i \neq x$.
+
+$D_{f_p^{(n)}}$) На области тотальности по $k$ можно определить символ $f_{P,k}$: $\forall \mydots, x_{k-1}~P(\mydots, x_{k-1}, f_{P,k}(\mydots, x_{k-1}))$. (<<($k$-)ассоциированный операционный символ>>).
+
+$D_{bin-map}$) Бинарное отношение $P$ называется отображением из $\xi_1$ в $\xi_2$ $\Def \delta_l(P) \subseteq \xi_1$, $P$ $\xi_2$-оперативно.
+
+$D_{non-sel}$) Отображение из $\xi$ называется неизбирательным, если оно $\xi$-тотально по левой компоненте. Такое отображение называют также <<отображением $\xi$>>.
+
+$D_{on}$) Отображение в $\xi$ называется <<отображением на $\xi$>> (<<на что>>), если оно $\xi$-тотально по правой компоненте.
+
+$D_{trans-rel}$) Преобразование $\xi$ -- неизбирательное отображение $\xi$, являющееся внутренним на $\xi$.
+
+$D_{bin-inv}$) Бинарное отношение $Q$ называется обратным к бинарному отношению $P$, если $\delta_l(Q) = \delta_r(P)$, $\delta_r(Q) = \delta_l(P)$, $\underset{\delta_l(Q)}{\forall} x \underset{\delta_r(Q)}{\forall} y~(Q(x, y) \Leftrightarrow P(y, x))$. (Обозначим такое $Q$ через $P^{inv}$.)
+
+$D_{bin-map-inv}$) Отображение $P$ называется обратимым, если $P^{inv}$ также является отображением ($P^{inv}$ тогда называется обратным к $P$ отображением; такое отображение $P$ называется также взаимно-однозначным.)
+
+$D_{subs}$) Перестановка (иногда <<подстановка>>) $\xi$ -- взаимно-однозначное преобразование $\xi$.
+
+\section{Специальная терминология для неизбирательных отображений по Н. Бурбаки *}
+
+$D_{sur-map}$) Неизбирательное отображение сюрьективно, если оно правототально.
+
+$D_{inj-map}$) Неизбирательное отображение инъективно, если оно левоуникально.
+
+$D_{bij-map}$) Неизбирательное отображение биективно, если оно сюрьективно и инъективно.
+
+$F_{bij}$) $P$ биективно $\Def$ $P$ взаимно однозначно.
+
+\section{Структуры. Продолжение}
+
+$D_{\subseteqst}$) $S_1 \subseteqst S_2 \Def$ существует биекция $g: S_1 \rightarrow S_2$, такая что $\underset{S_{srt1}}{\forall} s~s \subseteq g(s)$ и $\underset{S_{pred1}}{\forall} p~p \subseteqr g(p)$.
+
+$D_{\eqst}$) $S_1 \eqst S_2 \Def$ cуществует биекция $g: S_1 \rightarrow S_2$, такая что $\underset{S_{srt1}}{\forall} s~s = g(s)$ и $\underset{S_{pred1}}{\forall} p~p \eqr g(p)$.
+
+$D_{\subsetst}$) $S_1 \subsetst S_2 \Def S_1 \subseteqst S_2,~\sim S_1 \eqst S_2$.
+
+\clearpage
+
+
+\part{Структуры с порядком}
+
+\section{Отношения порядка и эквивалентности}
+
+Непосредственно далее $B$ -- некотрое внутреннее на своей области задания бинарное отношение.
+
+$D_{trans}$) $B$ транзитивно $\Def \forall x, y, z~(B(x, y), B(y, x) \Rightarrow B(x, z))$.
+
+$D_{refl}$) $B$ рефлексивно $\Def \forall x~B(x, x)$.
+
+$D_{sym}$) $B$ симметрично $\Def \forall x, y~(B(x, y) \Rightarrow B(y, x))$.
+
+$D_{antisym}$) $B$ антисимметрично $\Def \nexists x, y~(B(x, y) \Rightarrow B(y, x),~\sim y = x)$.
+
+$D_{eq}$) $B$ -- отношение эквивалентности $\Def$ $B$ транзитивно, рефлексивно и симметрично.
+
+$D_{part-ord}$) $B$ -- отношение частичного порядка $\Def$ $B$ транзитивно, рефлексивно и антисимметрично.
+
+$D_{=eq}$) Отношение "$=$" есть отношение эквивалентности.
+
+\section{Структуры с порядком (упорядоченные множества)}
+
+$D_{part-ord-set}$) Частично упорядоченным множеством будем называть структуру с одним носителем, на котором задано отношение частичного порядка (а иногда и сам носитель). Отношение порядка, в данном случае чатичного, обозначим "$\leq$".
+
+$D_{minimal-el}$) $x$ -- минимальный элемент частично упорядоченного множества $\Def \nexists y~y \leq x$.
+
+$D_{lin-ord}$) $B$ есть отношение линейного порядка $\Def$ $B$ есть отношение частичного порядка и $\forall x, y~(B(x, y); B(y, x)))$.
+
+$D_{lin-ord-set}$) Линейно упорядоченное множество (= совершенно упорядоченной множество = цепь) -- частично упорядоченное множество в котором "$\leq$" является отношением линейного порядка.
+
+$D_{least-el}$) $x$ -- наименьший элемент (= минимум) линейно упорядоченного множества $\Def \forall y~x \leq y$.
+
+Естественным образом определяются отношение "$\geq$" и максимальный и наибольший элементы.
+
+\section{Сравнение множеств по мощности}
+
+$D_{\eqp}$) $\alpha \eqp \beta \Def$ существует биекция $f: A \rightarrow B$.
+
+$D_{\geqp}$) $\alpha \geqp \beta \Def$ существует $\beta' \subseteq \beta$, что $\alpha \eqp \beta'$.
+
+$D_{\gtp}$) $ph\alpha \gtp \beta \Def \alpha \geqp \beta,~\sim \alpha \eqp \beta$.
+
+$D_{infinite}$) $\alpha$ бесконечно $\Def$ существует $\alpha' \subset \alpha$, такое что $\alpha' \eqp \alpha$.
+
+\section{Системы подмножеств, классы эквивалентности, фактормножества}
+
+$D_{\mathfrak{B}}$) $\mathfrak{B}(\alpha) \defeq \{ x | x \subseteq \alpha \}$.
+
+$D_{cover}$) $\beta$ -- покрытие множества $\alpha$ $\Def$ $\beta$ -- $\beta \subseteq \mathfrak{B}(\alpha)$, $\cupr \beta = \alpha$.
+
+$ph$) $\beta$ -- разбиение множества $\alpha$ $\Def$ $\beta$ -- покрытие $\alpha$, $\capr \beta = \varnothing$.
+
+Далее пусть на множестве $\alpha$ задано отношение эквивалентности $\phi$.
+
+$D_{partition}$) $\theta$ -- класс эквивалентности по отношению $\phi$ $\Def \forall x, y~(x \in \theta,~y \in \theta \Leftrightarrow \phi(x, y))$.
+
+$F_{eq-e}$) $\theta_1$ и $\theta_2$ -- классы эквивалентности по отношению $\phi$, $\theta_1 \cap \theta_2 \neq \varnothing$ $\Rightarrow$ $\theta_1 = \theta_2$.
+
+$D_{fac-set}$) $\beta$ -- фактормножество множества $\alpha$ по отношению $\phi$ $\Def$ $\beta$ есть разбиение $\alpha$, элементы $\beta$ -- классы эквивалентности по $\phi$.
+
+$F_{fac-set-1}$) $\exists! \beta$ $\beta$ есть фактормножество заданного множества $\alpha$ по заданному отношению $\phi$.
+
+\clearpage
+
+
+\part{Развитие теории порядка}
+
+\section{Дальнейшие определения}
+
+$D_{minorantEl}$) Миноранта (= нижняя грань) частично упорядоченного множества $X' \subseteq X$ есть такой $\alpha \in X$, что $\alpha \geqslant \beta$ для любого $\beta \in X'$.
+
+$D_{infimum}$) Инфимум (= точная нижняя грань) частично упорядоченного множества $Y' \subseteq Y$ есть наибольшая из нижних граней множества $Y'$.
+
+\section{Решёткоподобные структуры (теоретико-порядковое определение)}
+
+$D_{sl}$) Полурешётка верхняя (нижняя) -- частично упорядоченное множество, каждая пара элементов которого имеет супремум (инфимум).
+
+$D_{l}$) Решётка -- структура, являющаяся одновременно и верхней и нижней полурешётками.
+
+\section{Фундированные множества}
+
+$D_{wFoundedSet}$) Фундированное множество -- частично упорядоченное множество, любое непустое подмножество которого имеет минимальный элемент.
+
+$D_{wOrdSet}$) Вполне упорядоченное множество -- совершенно упорядоченное множество, являющееся фундированным.
+
+\clearpage
+
+
+\part{Арифметические структуры}
+
+\section{Начальные сведения об операционных символах и оперативах}
+
+$F_{cons^{(n)}}$) $P$ оперативно на $\Delta$ по $k$ $\Def \underset{\Delta}{\forall} \dots , x_{k-1},\dots, y_{k-1}\; (\dots, x_{k-1} = y_{k-1} \Rightarrow f_{p, k}(\dots, x_{k-1}) = f_{p, k}(\dots, y_{k-1})).$
+
+$F_{cons-inv^{(2)}}$) $P$ есть обратимое отображение $\Def \forall x, y\; (f_p(x) = f_p(y) \Rightarrow x = y).$
+
+Далее будем использовать операционные символы, родственные только оперативным отношениям.
+
+$n+1$ - арное оперативное отношение называют $n$-арным оперативным отношением или $n$-арной операцией.
+
+(Когда говорят об $n$-арной операции, чаще вместо предикатного используют родственный операционный символ.)
+
+$D_{op}$) Оператив -- структура как минимум с одной операцией.
+
+\section{Предарифметические структуры}
+
+$D_{pre-a-s}$) Предарифметика -- унарный оператив с определяющим отношением $\mathrm{next}$, не тотальным по правой компоненте.
+
+$D_{start-el}$) В предарифметике $x$ есть стартовый элемент $\Def \overline{\exists}\; a \; next \; (a, x).$
+
+$D_{pres-a-s}$) Арифметика Пресбургера -- предарифметика, в которой $next^{\,inv}$ также является оперативным отношением, а стартовый элемент единственен (его обозначим <<$o$>>).
+
+\section{Арифметика Пеано}
+
+$D_{rel-ind}$) В  предарифметике унарная операция $f$ индуктивна с базой $m \Def \; \Def A(m),\; \forall x \; (A(x) \Rightarrow A(f(x)) \Rightarrow \forall x \; \Delta(x).$
+
+$D_{a-s}$) Арифметика Пеано есть арифметика Пресбургера, в которой $f_{next}$ индуктивна с базой $o$.
+
+\section{Построение натуральных чисел по Фон-Нейману}
+
+$D_{prog}$) $w$ прогрессивно $\Def \varnothing \in w, \underset{w}{\forall} \; \xi \;\; \xi \cup \{\xi\} \in w, \; \forall \psi \; (\varnothing \in \psi, \forall \xi \;\; \xi \cup \{\xi\} \in \varphi \Rightarrow w \subseteq \psi).$
+
+$F_{prog1}$) $\exists ! \; w$ ($w$ прогрессивно). (Такое множество назовём множеством натуральных чисел и обозначим $\mathbb{N}$.)
+
+$F_{prog2}$) Если интерпретировать $\varnothing$ как $o$, а $f_{next}(x)$ как $x \cup \{x\}$, то на $\mathbb{N}$ реализуется арифметика Пеано.
+
+(Для элементов в $\mathbb{N}$ вводятся обозначения в десятичной системе счисления: 0 обозначает $\varnothing$, 1 обозначает $\varnothing \cup \{\varnothing\}, \dots)$
+
+\clearpage
+
+
+\part{Полугруппы и группы}
+
+\section{Начальные сведения о полугруппах и моноидах}
+
+$D_{assoc-op}$) Бинарная операция $f$ ассоциативна $\Def \forall x, y, z~f \; (f(x, y), z) = f(x, f(y, z)).$ (Далее будем использовать инфиксную запись.)
+
+$D_{sg}$) Полугруппа -- оператив с одним базовым сортом и определяющей бинарной ассоциативной операцией.
+
+(Непосредственно далее будем обозначать групповую операцию <<$\cdot$>> или вовсе опускать знак.)
+
+$D_n$) $m$ -- левый (правый) нейтральный элемент в полугруппе $\Def \forall x~mx = x$ ($\forall x \; xm = x$).
+
+$D_{mon}$) Моноид -- полугруппа, в которой существуют левый и правый нейтральные элементы.
+
+$F_{nm}$) В моноиде $\forall x, y$ ($x$ -- левый нейтральный, $y$ -- правый нейтральный $\Rightarrow x = y$).
+
+$F_{nm'}$) В моноиде все левые (правые) нейтральные элементы равны между собой.
+
+$F_{nm''}$) В моноиде все левые нейтральные элементы равны всем правым, таким образом правомерно говорить об универсальном нейтральном элементе (обозначаемом <<$e$>>).
+
+$D_{pmon}$) Предмоноид -- полугруппа, в которой существует и единственен левый нейтральный элемент (обозначаемый <<$e_l$>>).
+
+$D_{l-inv-e}$) $m$ -- левый (правый) обратный по отношению к $x$ элемент предмоноида, дающий левый нейтральный $\Def mx = e_l \; (xm = e_l).$
+
+$D_{gr}$) Группа -- предмоноид, в котором для каждого элемента существует левый обратный, дающий левый нейтральный.
+
+$F_{gr}$) Группа есть моноид.
+
+$F_{gr2}$) В группе всякий левый обратный для элемента $x$ является и правым обратным для того же элемента $x$ (<<универсальный обратный>>).
+
+$F_{gr3}$) В группе всякий обратный элемент для некоторого $x$ равен любому другому обратному элементу для того же $x$.
+
+$F_{gr4}^{(r)}$) В группе $\forall a, b~\exists ! \; x \; ax = b.$
+
+$F_{gr4}^{(l)}$) В группе $\forall a, b~\exists ! \; x \; xa = b.$
+
+$D_{comm-el}$) В оперативе $x$ и $y$ коммутируют $\Def x \cdot y = y \cdot x.$
+
+$D_{comm-op}$) Коммутативный оператор -- такой оператив, в котором $\forall x, y$ $x$ и $y$ коммутируют.
+
+\section{Кольцеподобные структуры}
+
+$D_{left-distr}$) В двойном оперативе выполняется левая дистрибутивность <<$\cdot$>> относительно <<$+$>> $\Def \forall x, y, z~x \cdot (y+z) = x \cdot y + x \cdot z.$
+
+$D_{sr}$) Полукольцо -- двойной оператив с операциями <<$\cdot$>> и <<$+$>>, относительно <<$+$>> являющийся коммутативным моноидом, а относительно <<$\cdot$>> -- полугруппой, кроме того для <<$\cdot$>> выполняется свойство леводистрибутивности относительно <<$+$>>.
+
+$D_{ring}$) Кольцо есть полукольцо, являющееся коммутативной группой относительно <<$+$>>.
+
+\section{Решёткоподобные структуры (алгебраическое определение)}
+
+$D_{sl}^{(a)}$) Полурешётка -- коммутативная идемпотентная полугруппа.
+
+$D_{l}^{(a)}$) Решётка -- двойной оператив, относительно каждой из своих операций являющийся полурешёткой, и такой, что каждая из его операций левопоглотительна относительно другой.
+
+\clearpage
+
+
+\part{Гомоморфизм структур}
+
+\section{Основные понятия}
+
+$D_{marph}$) Пусть даны две структуры $S_1$ и $S_2$. Коллекция $m$ неизбирательных отображений компонент $s_{srt1}$ и $s_{pred1}$ в компоненты $s_{srt2}$ и $s_{pred2}$ соответственно называется гомоморфизмом $S_1$ в $S_2$, если $\underset{s_{prod1}}{\forall} p~p(\dots, \, x_k) \Rightarrow m[p] (\dots, \, m[x_n]).$
+
+В этом случае говорят, что $S_2$ гомеоморфно $S_1$.
+
+Для произвольной пары структур $S_1$ и $S_2$ может существовать более одного гомоморфизма $S_1$ в $S_2$ (если не указано явно, то имеется в виду некоторый <<естественный>> в данном контексте гомоморфизм), а может не существовать ни одного.
+
+$F_{morph-op}$) Гомоморфизм $S_1$ в $S_2$ <<сохраняет значение>> функциональных символов, родственных предикатам из $S_{prod1}$.
+
+$D_{morph-mon}$) Мономорфизм -- инъективный гомоморфизм.
+
+$D_{morph-epi}$) Эпиморфизм -- сюръективный гомоморфизм.
+
+$D_{morph-iso}$) Изоморфизм -- биективный гомоморфизм.
+
+$D_{morph-endo}$) Эндоморфизм -- внутренний гомоморфизм некоторой структуры $S$.
+
+$D_{morph-auto}$) Автоморфизм -- биективный эндоморфизм (внутренний изоморфизм).
+
+\clearpage
+
+
+\part{Структура $\mathbb{Z}$}
+
+\section{Основные понятия}
+
+$D_{p-z}$) Предцелой структурой назовём кольцо $v$ такое, что $\mathbb{N} \underset{st}{\subseteq} v$.
+
+$F_{z1}$) Существует и единственна минимальная по отношению $\underset{st}{\subseteq}$ предцелая структура.
+
+$D_{\mathbb{Z}}$) $\mathbb{Z}$ -- минимальная по отношению $\underset{st}{\subseteq}$ предцелая структура (<<множество целых чисел>>).
+
+\section{Построение $\mathbb{Z}$}
+
+$D_{\mathbb{N}-dp}$) Назовём ($a,b$), где $a, b \in \mathbb{N}$  $\mathbb{N}$-диполем с головой $a$ и хвостом $b$ и обозначим через $D(\mathbb{N})$ множество всех $\mathbb{N}$-диполей.
+
+$D_{\text{\textcircled{=}}}$) $(a_1, b_1)$ \textcircled{=} $(a_2, b_2) \Def a_1 + b_2 = a_2 + b_1.$
+
+$D_{\bigoplus}$) $(a_1, b_1) \bigoplus \, (a_2, b_2) \underset{d}{=} (a_1 + a_2, \, b_1 + b_2).$
+
+$D_{\bigodot}$) $(a_1, b_1) \bigodot \, (a_2, b_2) \underset{d}{=} (a_1 \cdot a_2 + b_1 \cdot b_2, \, a_1 \cdot b_2 + b_1 \cdot a_2).$
+
+$F_{eq \text{\textcircled{=}}}$) <<\textcircled{=}>> есть отношение эквивалентности.
+
+$F_{\zeta}$) $\zeta \underset{d}{=} D(\mathbb{N}) /$ \textcircled{=}.
+
+$F_{[()]}$) Обозначим через $[(a, b)]$ элемент $\zeta$, содержащий $(a, b)$.
+
+$D_{\underline{\bigoplus}}$)  $[(a_1, b_1)] \: \underline{\bigoplus} \: [(a_2, b_2)] \underset{d}{=} [(a_1, b_1) \: \underline{\bigoplus} \: (a_2, b_2)].$
+
+$D_{\underline{\bigodot}}$)  $[(a_1, b_1)] \: \underline{\bigodot} \: [(a_2, b_2)] \underset{d}{=} [(a_1, b_1) \: \underline{\bigodot} \: (a_2, b_2)].$
+
+$D_{\zeta r}$) $\zeta$ является кольцом относительно $\underline{\bigoplus}$ и $\underline{\bigodot}$.
+
+$F_{\zeta p z1}$) $\zeta$ является предцелой структурой, если принять, что $a-b$ есть $[(a, b)]$, $+$ есть $\underline{\bigoplus}$.
+
+$F_{\zeta p z2}$) $\zeta$ является $\mathbb{Z}$, если принять, что $a-b$ есть $[(a, b)]$, $\cdot$ есть $\underline{\bigodot}$.
+
+\clearpage
+
+
+\part{Лонгиметрия}
+
+\section{Инцидентность}
+
+$D_{segm}$) Отрезком будем называть любую пару точек $\{A, B\}$. и обозначать через $AB$, элементы этой пары будем называть концами данного отрезка. Множество всех отрезков из $E_1$ обозначим через $Segm(E_1)$, множество всех невырожденных отрезков из $E_1$ -- $SegmP(E_1)$.
+
+$F_{ax-inc-1}$) $SegmP(E_1) \neq \varnothing$.
+
+\textbf{Порядок для троек точек}
+
+$F_{ax-ord3-1}$) $B$ между $A$ и $C$ (обозначается через $A-B-C$) $\Leftrightarrow$ $B$ между $C$ и $A$, и все точки $A$, $B$ и $C$ различны.
+
+$F_{ax-ord3-2}$) Из любых трёх точек одна и только одна лежит между двумя другими. (В многомерной геометрии условие слабее.)
+
+$D_{inside}$) $X$ внутри о. $AB$ $\Leftrightarrow A-X-B$ ($\Leftrightarrow$ $A$ и $B$ по разные стороны от $X$ [обозначается через $\delta_X(\_,\_)$]).
+
+$D_{outside}$) $X$ вне о. $AB$ $\Leftrightarrow$ $\neg$($X$ внутри $AB$) и $\neg$($X$ есть конец $AB$) ($\Leftrightarrow$ $A$ и $B$ по одну сторону от $X$ [обозначается через $\lambda_X(\_,\_)$]).
+
+$F_{ax-ord3-3}$) Внутри любого невырожденного отрезка лежит некоторая точка. (В многомерной геометрии это теорема.)
+
+$F_{ax-ord3-4}$) Для любых различных точек $A$ и $X$ существует точка $B$ такая, что $A-X-B$.
+
+\textbf{Порядок для четвёрок точек}
+
+$F_{ax-ord4-1}$) Если $A-B-C$ и $B-C-D$, то а) $A-B-C$; б) $A-C-D$.
+
+$F_{ax-ord4-2}$) Если $A-C-D$ и $A-B-C$, то $B-C-D$.
+
+$F_{th-ord4-1}$) Если $A-C-D$ и $A-B-C$, то $A-B-D$.
+
+$F_{th-ord4-2}$) Если $K-L-M$ и $K-X-M$, то либо $K-X-L$ либо $L-X-M$.
+
+$F_{th-ord4-3}$) Если $A$ с $B$ лежат с одной стороны от $X$ и $B$ с $C$ лежат с одной стороны от $X$, то и $A$ с $C$ лежит с одной стороны от $X$.
+
+\clearpage
+
+%\renewcommand{\baselinestretch}{0.75}\normalsize
+\tableofcontents
+%\renewcommand{\baselinestretch}{1.0}\normalsize
+
+\end{document}
