@@ -5,11 +5,11 @@ TARGETDIR := .
 
 dotfiles = $(wildcard *.dot)
 diafiles = $(wildcard *.dia)
-latexfiles = $(wildcard *.latex)
-dvifiles = $(patsubst %.latex,%.dvi,$(wildcard $(latexfiles)))
-psfiles = $(patsubst %.latex,%.ps,$(wildcard $(latexfiles)))
-pdffiles = $(patsubst %.latex,%.pdf,$(wildcard $(latexfiles)))
-rtffiles = $(patsubst %.latex,%.rtf,$(wildcard $(latexfiles)))
+latexfiles = $(wildcard *.tex)
+dvifiles = $(patsubst %.tex,%.dvi,$(wildcard $(latexfiles)))
+psfiles = $(patsubst %.tex,%.ps,$(wildcard $(latexfiles)))
+pdffiles = $(patsubst %.tex,%.pdf,$(wildcard $(latexfiles)))
+rtffiles = $(patsubst %.tex,%.rtf,$(wildcard $(latexfiles)))
 gnuplotfiles = $(wildcard *.gnuplot)
 GNUPLOT_DATADIR = $(gnuplot.files)
 gnupl_datafiles = $(wildcard $(GNUPLOT_DATADIR)*)
@@ -43,8 +43,8 @@ dvi: prepare-dotfiles prepare-diafiles prepare-gnuplotfiles $(latexfiles);
 
 rtf: dvi
 	for NAME in $(latexfiles);\
-	do NAME2=`echo $$NAME | sed -n 's/\(.*\)\(\.latex\)/\1/p'`;\
-        cp $$NAME2".latex" $$NAME2".tex";\
+	do NAME2=`echo $$NAME | sed -n 's/\(.*\)\(\.tex\)/\1/p'`;\
+        cp $$NAME2".tex" $$NAME2".tex";\
 	latex2rtf -F -M12 -a $$NAME2".aux" -o $$NAME2".rtf" $$NAME2;\
         rm $$NAME2".tex";\
 	done
