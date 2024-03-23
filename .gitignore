@@ -280,3 +280,4 @@ TSWLatexianTemp*
 *.html
 *.tgz
 *.odt
+.idea
